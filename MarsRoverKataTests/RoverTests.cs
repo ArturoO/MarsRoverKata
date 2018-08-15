@@ -85,10 +85,17 @@ namespace MarsRoverKataTests
         }
 
         [TestCase("MMM", "O:0:2:N")]
+        [TestCase("MMRMMMM", "O:3:2:E")]
+        [TestCase("MMRMMMLMMMLMM", "O:2:5:W")]
         public void GetCoordinates_RoverEncountersObstacle_ReturnsCorrectCoordinates(string commands, string expected)
         {
+            List<Coordinates> obstacles = new List<Coordinates>() {
+                new Coordinates(0,3),
+                new Coordinates(4,2),
+                new Coordinates(1,5)
+            };
 
-            Rover rover = new Rover();
+            Rover rover = new Rover(obstacles);
             rover.Execute(commands);
             Assert.That(rover.GetCoordinates(), Is.EqualTo(expected));
         }
