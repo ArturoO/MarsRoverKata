@@ -84,5 +84,14 @@ namespace MarsRoverKataTests
             Assert.That(rover.GetCoordinates(), Is.EqualTo(expected));
         }
 
-}
+        [TestCase("MMM", "O:0:2:N")]
+        public void GetCoordinates_RoverEncountersObstacle_ReturnsCorrectCoordinates(string commands, string expected)
+        {
+
+            Rover rover = new Rover();
+            rover.Execute(commands);
+            Assert.That(rover.GetCoordinates(), Is.EqualTo(expected));
+        }
+
+    }
 }

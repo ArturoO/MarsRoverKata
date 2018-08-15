@@ -11,7 +11,8 @@ namespace MarsRoverKata
         public char direction = 'N';
         public int X = 0;
         public int Y = 0;
-        
+        public bool obstacle = false;
+
         readonly Dictionary<char, char> North = new Dictionary<char, char>() { { 'L', 'W' }, { 'R', 'E' } };
         readonly Dictionary<char, char> East = new Dictionary<char, char>() { { 'L', 'N' }, { 'R', 'S' } };
         readonly Dictionary<char, char> South = new Dictionary<char, char>() { { 'L', 'E' }, { 'R', 'W' } };
@@ -31,41 +32,58 @@ namespace MarsRoverKata
             }
         }
 
+        public string Format()
+        {
+            return (obstacle ? "O:" : "") + X + ":" + Y + ":" + direction;
+        }
+
         public void Move()
         {
+            int nextX = X;
+            int nextY = Y;
+
             if (direction == 'N')
             {
-                if (Y < 9)
-                    Y++;
+                if (nextY < 9)
+                    nextY++;
                 else
                     TurnAround();
             }
             else if (direction == 'S')
             {
-                if (Y > 0)
-                    Y--;
+                if (nextY > 0)
+                    nextY--;
                 else
                     TurnAround();
             }
             else if (direction == 'E')
             {
-                if (X < 9)
-                    X++;
+                if (nextX < 9)
+                    nextX++;
                 else
                     TurnAround();
             }
             else if (direction == 'W')
             {
-                if (X > 0)
-                    X--;
+                if (nextX > 0)
+                    nextX--;
                 else
                     TurnAround();
             }
-        }
 
-        public string Format()
-        {
-            return X + ":" + Y + ":" + direction;
+            X = nextX;
+            Y = nextY;
+
+            //if (nextX==0 && nextY == 3)
+            //{
+            //    obstacle = true;
+            //}
+            //else
+            //{
+            //    X = nextX;
+            //    Y = nextY;
+            //}
+
         }
 
         public void Rotate(char command)
