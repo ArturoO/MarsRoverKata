@@ -42,5 +42,47 @@ namespace MarsRoverKataTests
             Assert.That(rover.GetCoordinates(), Is.EqualTo(expected));
         }
 
-    }
+        [TestCase("M", "0:1:N")]
+        [TestCase("MM", "0:2:N")]
+        [TestCase("MMMMMMM", "0:7:N")]
+        [TestCase("MMMMMMMMM", "0:9:N")]
+        [TestCase("MMMMMMMMMM", "0:9:S")]
+        public void GetCoordinates_RoverMovesForward_ReturnsCorrectCoordinates(string commands, string expected)
+        {
+            Rover rover = new Rover();
+            rover.Execute(commands);
+            Assert.That(rover.GetCoordinates(), Is.EqualTo(expected));
+        }
+
+        [TestCase("RM", "1:0:E")]
+        [TestCase("RMM", "2:0:E")]
+        [TestCase("RMMMMMMM", "7:0:E")]
+        [TestCase("RMMMMMMMMM", "9:0:E")]
+        [TestCase("RMMMMMMMMMM", "9:0:W")]
+        public void GetCoordinates_RoverTurnsEastAndMovesForward_ReturnsCorrectCoordinates(string commands, string expected)
+        {
+            Rover rover = new Rover();
+            rover.Execute(commands);
+            Assert.That(rover.GetCoordinates(), Is.EqualTo(expected));
+        }
+
+        [TestCase("LM", "0:0:E")]
+        [TestCase("RMMLLM", "1:0:W")]
+        public void GetCoordinates_RoverTurnsWestAndMovesForward_ReturnsCorrectCoordinates(string commands, string expected)
+        {
+            Rover rover = new Rover();
+            rover.Execute(commands);
+            Assert.That(rover.GetCoordinates(), Is.EqualTo(expected));
+        }
+
+        [TestCase("RRM", "0:0:N")]
+        [TestCase("MMMRRM", "0:2:S")]
+        public void GetCoordinates_RoverTurnsSouthAndMovesForward_ReturnsCorrectCoordinates(string commands, string expected)
+        {
+            Rover rover = new Rover();
+        rover.Execute(commands);
+            Assert.That(rover.GetCoordinates(), Is.EqualTo(expected));
+        }
+
+}
 }

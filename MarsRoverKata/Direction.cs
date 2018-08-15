@@ -17,6 +17,13 @@ namespace MarsRoverKata
             else if (Current == 'S') Current = South[command];
             else if (Current == 'W') Current = West[command];
         }
+
+
+        public void TurnAround()
+        {
+            Rotate('R');
+            Rotate('R');
+        }
     }
     
 }
