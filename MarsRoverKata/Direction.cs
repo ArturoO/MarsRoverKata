@@ -2,7 +2,7 @@
 
 namespace MarsRoverKata
 {
-    class Direction
+    public class Direction
     {
         public char Current = 'N';
         private readonly Dictionary<char, char> North = new Dictionary<char, char>() { { 'L', 'W' }, { 'R', 'E' } };
@@ -17,7 +17,6 @@ namespace MarsRoverKata
             else if (Current == 'S') Current = South[command];
             else if (Current == 'W') Current = West[command];
         }
-
 
         public void TurnAround()
         {

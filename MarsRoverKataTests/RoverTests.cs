@@ -80,7 +80,7 @@ namespace MarsRoverKataTests
         public void GetCoordinates_RoverTurnsSouthAndMovesForward_ReturnsCorrectCoordinates(string commands, string expected)
         {
             Rover rover = new Rover();
-        rover.Execute(commands);
+            rover.Execute(commands);
             Assert.That(rover.GetCoordinates(), Is.EqualTo(expected));
         }
 
