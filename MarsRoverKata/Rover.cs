@@ -8,26 +8,16 @@ namespace MarsRoverKata
 {
     public class Rover
     {
-        public char direction = 'N';
-        public Coordinates coordinates = new Coordinates();
-        public bool obstacle = false;
-        List<Coordinates> obstacles = new List<Coordinates>();
-
-        readonly Dictionary<char, char> North = new Dictionary<char, char>() { { 'L', 'W' }, { 'R', 'E' } };
-        readonly Dictionary<char, char> East = new Dictionary<char, char>() { { 'L', 'N' }, { 'R', 'S' } };
-        readonly Dictionary<char, char> South = new Dictionary<char, char>() { { 'L', 'E' }, { 'R', 'W' } };
-        readonly Dictionary<char, char> West = new Dictionary<char, char>() { { 'L', 'S' }, { 'R', 'N' } };
+        char direction = 'N';
+        Coordinates coordinates = new Coordinates();
+        bool encounteredObstacle = false;
+        Grid grid = new Grid();
 
         public Rover() { }
 
-        public Rover(List<Coordinates> obstacles)
+        public Rover(Grid grid)
         {
-            this.obstacles = obstacles;
-        }
-
-        public string GetCoordinates()
-        {
-            return Format();
+            this.grid = grid;
         }
 
         public void Execute(string commands)
@@ -47,9 +37,9 @@ namespace MarsRoverKata
             }
         }
 
-        public string Format()
+        public string GetCoordinates()
         {
-            return (obstacle ? "O:" : "") + coordinates.X + ":" + coordinates.Y + ":" + direction;
+            return (encounteredObstacle ? "O:" : "") + coordinates.X + ":" + coordinates.Y + ":" + direction;
         }
 
         public void Move()
@@ -85,23 +75,18 @@ namespace MarsRoverKata
                     TurnAround();
             }
 
-            if (obstacles.Contains(nextCoordinates))
-            {
-                obstacle = true;
-            }
+            if (grid.AreCoordinatesTraversable(nextCoordinates))
+                encounteredObstacle = true;
             else
-            {
                 coordinates = nextCoordinates;
-            }
-
         }
 
         public void Rotate(char command)
         {
-            if (direction == 'N') direction = North[command];
-            else if (direction == 'E') direction = East[command];
-            else if (direction == 'S') direction = South[command];
-            else if (direction == 'W') direction = West[command];
+            if (direction == 'N') direction = Coordinates.North[command];
+            else if (direction == 'E') direction = Coordinates.East[command];
+            else if (direction == 'S') direction = Coordinates.South[command];
+            else if (direction == 'W') direction = Coordinates.West[command];
         }
 
         public void TurnAround()
