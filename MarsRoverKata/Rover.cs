@@ -48,28 +48,28 @@ namespace MarsRoverKata
 
             if (direction == 'N')
             {
-                if (nextCoordinates.Y < 9)
+                if (nextCoordinates.Y < grid.MaxY)
                     nextCoordinates.Y++;
                 else
                     TurnAround();
             }
             else if (direction == 'S')
             {
-                if (nextCoordinates.Y > 0)
+                if (nextCoordinates.Y > grid.MinY)
                     nextCoordinates.Y--;
                 else
                     TurnAround();
             }
             else if (direction == 'E')
             {
-                if (nextCoordinates.X < 9)
+                if (nextCoordinates.X < grid.MaxX)
                     nextCoordinates.X++;
                 else
                     TurnAround();
             }
             else if (direction == 'W')
             {
-                if (nextCoordinates.X > 0)
+                if (nextCoordinates.X > grid.MinX)
                     nextCoordinates.X--;
                 else
                     TurnAround();

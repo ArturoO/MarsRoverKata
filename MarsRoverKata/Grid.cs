@@ -8,7 +8,12 @@ namespace MarsRoverKata
 {
     public class Grid
     {
+        public int MinX = 0;
+        public int MaxX = 9;
+        public int MinY = 0;
+        public int MaxY = 9;
         List<Coordinates> obstacles = new List<Coordinates>();
+
 
         public void AddObstacle(Coordinates obstacle)
         {
